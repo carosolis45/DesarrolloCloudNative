@@ -1,17 +1,13 @@
-FROM eclipse-temurin:22-jdk AS buildstage 
+package cl.duoc.ejemplo.microservicio;
 
-RUN apt-get update && apt-get install -y maven
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-WORKDIR /app
+@SpringBootTest
+class MicroservicioApplicationTests {
 
-COPY pom.xml .
-COPY src /app/src
-RUN mvn clean package
+	@Test
+	void contextLoads() {
+	}
 
-FROM eclipse-temurin:22-jdk
-
-COPY --from=buildstage /app/target/microservicio-1.0.0.jar /app/app.jar
-
-EXPOSE 8080
-
-CMD ["java", "-jar", "/app/app.jar"]
+}
